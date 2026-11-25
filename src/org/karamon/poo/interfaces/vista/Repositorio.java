@@ -1,6 +1,7 @@
 package org.karamon.poo.interfaces.vista;
 
 import org.karamon.poo.interfaces.excepciones.AccesoDatoExcepcion;
+import org.karamon.poo.interfaces.excepciones.EscrituraAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.excepciones.LecturaAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.modelo.Cliente;
 import org.karamon.poo.interfaces.repositorio.ClienteListRepositorio;
@@ -22,6 +23,9 @@ public class Repositorio {
             System.out.println("===================== CLIENTES REGISTRADOS =====================");
             List<Cliente> clientes = repo.listar();
             clientes.forEach(System.out::println);
+            Cliente karamon = new Cliente("Karamon", "Cherif");
+            repo.crear(karamon);
+            repo.crear(karamon);
 
             List<Cliente> paginable = repo.listar(1, 3);
             System.out.println("=========================== PAGINABLE ===========================");
@@ -41,10 +45,13 @@ public class Repositorio {
             System.out.println("Total de registros: " + repo.total());
 
         } catch (LecturaAccesoDatoExcepcion excepcion) {
-            System.out.println(excepcion.getMessage());
+            System.out.println("Lectura: " + excepcion.getMessage());
+            excepcion.printStackTrace();
+        } catch (EscrituraAccesoDatoExcepcion excepcion) {
+            System.out.println("Escritura: " + excepcion.getMessage());
             excepcion.printStackTrace();
         } catch (AccesoDatoExcepcion accesoDatoExcepcion) {
-            System.out.println(accesoDatoExcepcion.getMessage());
+            System.out.println("Generica: " + accesoDatoExcepcion.getMessage());
             accesoDatoExcepcion.printStackTrace();
         }
     }

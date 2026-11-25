@@ -1,6 +1,7 @@
 
 package org.karamon.poo.interfaces.repositorio;
 
+import org.karamon.poo.interfaces.excepciones.EscrituraAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.excepciones.LecturaAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.modelo.Cliente;
 
@@ -49,7 +50,7 @@ public class ClienteListRepositorio implements CompletoRepositorio {
     }
 
     @Override
-    public void crear(Cliente cliente) throws LecturaAccesoDatoExcepcion {
+    public void crear(Cliente cliente) throws LecturaAccesoDatoExcepcion, EscrituraAccesoDatoExcepcion {
 
         if (cliente == null) {
             throw new LecturaAccesoDatoExcepcion("El cliente no puede ser null");
@@ -61,7 +62,7 @@ public class ClienteListRepositorio implements CompletoRepositorio {
 
         for (Cliente c : dataSource) {
             if (c.getId().equals(cliente.getId())) {
-                throw new LecturaAccesoDatoExcepcion("El cliente ya existe");
+                throw new EscrituraAccesoDatoExcepcion("El cliente ya existe");
             }
         }
 
@@ -91,10 +92,10 @@ public class ClienteListRepositorio implements CompletoRepositorio {
 
     @Override
     public List<Cliente> listar(String campo, Direccion dir)
-            throws LecturaAccesoDatoExcepcion {
+            throws EscrituraAccesoDatoExcepcion {
 
         if (dir == null) {
-            throw new LecturaAccesoDatoExcepcion("La dirección no puede ser null");
+            throw new EscrituraAccesoDatoExcepcion("La dirección no puede ser null");
         }
 
         List<Cliente> listaOrdenada = new ArrayList<>(dataSource);
