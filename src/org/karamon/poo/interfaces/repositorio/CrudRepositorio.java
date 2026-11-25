@@ -10,7 +10,7 @@ public interface CrudRepositorio {
 
     Cliente porId(Integer id) throws AccesoDatoExcepcion;
 
-    void crear(Cliente cliente);
+    void crear(Cliente cliente) throws AccesoDatoExcepcion;
 
     void editar(Cliente cliente) throws AccesoDatoExcepcion;
 
