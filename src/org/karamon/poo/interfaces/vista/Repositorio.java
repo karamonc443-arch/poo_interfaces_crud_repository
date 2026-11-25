@@ -1,5 +1,7 @@
 package org.karamon.poo.interfaces.vista;
 
+import org.karamon.poo.interfaces.excepciones.AccesoDatoExcepcion;
+import org.karamon.poo.interfaces.excepciones.LecturaAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.modelo.Cliente;
 import org.karamon.poo.interfaces.repositorio.ClienteListRepositorio;
 import org.karamon.poo.interfaces.repositorio.CompletoRepositorio;
@@ -9,6 +11,9 @@ import java.util.List;
 
 public class Repositorio {
     public static void main(String[] args) {
+        try {
+
+
         CompletoRepositorio repo = new ClienteListRepositorio();
         repo.crear(new Cliente("Jano", "Pérez"));
         repo.crear(new Cliente("Bea", "González"));
@@ -35,6 +40,12 @@ public class Repositorio {
         clientes.forEach(System.out::println);
         System.out.println("Total de registros: " + repo.total());
 
-
+        } catch (LecturaAccesoDatoExcepcion excepcion) {
+            System.out.println(excepcion.getMessage());
+            excepcion.printStackTrace();
+        } catch (AccesoDatoExcepcion accesoDatoExcepcion) {
+            System.out.println(accesoDatoExcepcion.getMessage());
+            accesoDatoExcepcion.printStackTrace();
+        }
     }
 }

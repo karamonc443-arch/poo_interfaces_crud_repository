@@ -1,5 +1,6 @@
 package org.karamon.poo.interfaces.repositorio;
 
+import org.karamon.poo.interfaces.excepciones.LecturaAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.modelo.Cliente;
 
 import java.util.ArrayList;
@@ -29,7 +30,10 @@ public class ClienteListRepositorio implements CompletoRepositorio {
     }
 
     @Override
-    public Cliente porId(Integer id) {
+    public Cliente porId(Integer id) throws LecturaAccesoDatoExcepcion {
+        if (id == null || id <= 0) {
+            throw new LecturaAccesoDatoExcepcion("Id inválido debe ser > 0");
+        }
         Cliente buscarCliente = new Cliente();
         for (Cliente cliente : dataSource) {
             if (cliente.getId() != null && cliente.getId().equals(id)) {
@@ -47,14 +51,14 @@ public class ClienteListRepositorio implements CompletoRepositorio {
     }
 
     @Override
-    public void editar(Cliente cliente) {
+    public void editar(Cliente cliente) throws LecturaAccesoDatoExcepcion {
         Cliente editarCliente = this.porId(cliente.getId());
         editarCliente.setNombre(cliente.getNombre());
         editarCliente.setApellido(cliente.getApellido());
     }
 
     @Override
-    public void eliminar(Integer id) {
+    public void eliminar(Integer id) throws LecturaAccesoDatoExcepcion {
         Cliente clienteEliminar = this.porId(id);
         this.dataSource.remove(clienteEliminar);
     }
