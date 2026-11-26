@@ -23,10 +23,6 @@ public class Repositorio {
             System.out.println("===================== CLIENTES REGISTRADOS =====================");
             List<Cliente> clientes = repo.listar();
             clientes.forEach(System.out::println);
-            Cliente karamon = new Cliente("Karamon", "Cherif");
-            repo.crear(karamon);
-            repo.crear(karamon);
-
             List<Cliente> paginable = repo.listar(1, 3);
             System.out.println("=========================== PAGINABLE ===========================");
             paginable.forEach(System.out::println);
@@ -40,7 +36,7 @@ public class Repositorio {
             Cliente editado = repo.porId(2);
             System.out.println(editado);
             System.out.println("=========================== ELIMINAR CLIENTE ===========================");
-            repo.eliminar(150);
+            repo.eliminar(1);
             clientes.forEach(System.out::println);
             System.out.println("Total de registros: " + repo.total());
 

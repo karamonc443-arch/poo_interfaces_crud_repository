@@ -3,6 +3,7 @@ package org.karamon.poo.interfaces.repositorio;
 
 import org.karamon.poo.interfaces.excepciones.EscrituraAccesoDatoExcepcion;
 import org.karamon.poo.interfaces.excepciones.LecturaAccesoDatoExcepcion;
+import org.karamon.poo.interfaces.excepciones.RegistroDuplicadoExcepcion;
 import org.karamon.poo.interfaces.modelo.Cliente;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class ClienteListRepositorio implements CompletoRepositorio {
             }
         }
 
-        throw new LecturaAccesoDatoExcepcion("No existe ningún registro con id: " + id);
+        throw new LecturaAccesoDatoExcepcion("No existe ningún cliente con id: " + id);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ClienteListRepositorio implements CompletoRepositorio {
 
         for (Cliente c : dataSource) {
             if (c.getId().equals(cliente.getId())) {
-                throw new EscrituraAccesoDatoExcepcion("El cliente ya existe");
+                throw new RegistroDuplicadoExcepcion("El cliente con id " + c.getId() + " ya existe");
             }
         }
 
